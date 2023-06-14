@@ -19,6 +19,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cloud_firestore: ^4.4.5
+  cloud_functions: ^4.0.13
+  firebase_messaging: ^14.3.0
+  firebase_app_check: ^0.1.1
+  firebase_database: ^10.0.16
+  firebase_storage: ^11.0.16
+  firebase_auth: ^4.3.0
+  firebase_remote_config: ^3.0.15
+  firebase_crashlytics: ^3.0.17
+  firebase_performance: ^0.9.0
+  firebase_core: ^2.8.0
 
 dev_dependencies:
   flutter_test:
