@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 
 class AccueilPage extends StatefulWidget {
   @override
@@ -22,6 +21,21 @@ class _AccueilPageState extends State<AccueilPage> {
           : (_currentIndex == 1)
               ? GroupesPage()
               : ChatbotPage(),
+      floatingActionButton: _currentIndex == 0
+          ? FloatingActionButton(
+              onPressed: () {
+                // Action à effectuer lors de l'appui sur l'icône d'écriture à un contact
+              },
+              child: Icon(Icons.email),
+            )
+          : _currentIndex == 1
+              ? FloatingActionButton(
+                  onPressed: () {
+                    // Action à effectuer lors de l'appui sur l'icône de création de groupe
+                  },
+                  child: Icon(Icons.group_add),
+                )
+              : null,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
@@ -93,8 +107,24 @@ class ContactsPage extends StatelessWidget {
 class GroupesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Page des groupes'),
+    return Padding(
+      padding: EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Rechercher des groupes',
+                  ),
+                ),
+              ),
+            ],
+          ),
+          // Ajoutez ici la liste des groupes ou les résultats de recherche
+        ],
+      ),
     );
   }
 }
@@ -132,23 +162,24 @@ class _ChatbotPageState extends State<ChatbotPage> {
               },
             ),
           ),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: TextField(
+              controller: messageController,
+              maxLines: 5,
+              decoration: InputDecoration(
+                labelText: 'Message',
+                contentPadding: EdgeInsets.all(16.0),
+              ),
+            ),
+          ),
+          SizedBox(height: 12.0),
           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Expanded(
-                child: TextFormField(
-                  controller: messageController,
-                  decoration: InputDecoration(
-                    labelText: 'Message',
-                  ),
-                ),
-              ),
-              IconButton(
-                icon: Icon(Icons.insert_emoticon),
-                onPressed: () {
-                  // Action à effectuer lors de l'appui sur l'icône d'emoji
-                  // Vous pouvez ajouter la logique pour insérer un emoji dans le champ de texte ici
-                },
-              ),
               IconButton(
                 icon: Icon(Icons.send),
                 onPressed: _sendMessage,
